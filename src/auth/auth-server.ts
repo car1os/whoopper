@@ -64,7 +64,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 });
 </script></body></html>`;
 
-export function startAuthServer(): Promise<AuthServerResult> {
+export function startAuthServer(port?: number): Promise<AuthServerResult> {
   return new Promise((resolve, reject) => {
     let codeResolve: ((val: { code: string; state: string }) => void) | null = null;
     let tokenResolve: ((val: { accessToken: string; expiresIn: number }) => void) | null = null;
@@ -118,7 +118,7 @@ export function startAuthServer(): Promise<AuthServerResult> {
       res.end('Not found');
     });
 
-    server.listen(0, '127.0.0.1', () => {
+    server.listen(port ?? 0, '127.0.0.1', () => {
       const address = server.address();
       if (!address || typeof address === 'string') {
         reject(new Error('Failed to start auth server'));

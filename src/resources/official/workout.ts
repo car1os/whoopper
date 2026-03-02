@@ -3,6 +3,6 @@ import type { Workout } from '../../models/workout.js';
 
 export class WorkoutResource extends CollectionResource<Workout> {
   constructor(client: ConstructorParameters<typeof CollectionResource>[0]) {
-    super(client, '/v1/activity/workout');
+    super(client, '/activity/workout');
   }
 }

@@ -5,14 +5,14 @@ import type { Sleep } from '../../models/sleep.js';
 
 export class CycleResource extends CollectionResource<Cycle> {
   constructor(client: ConstructorParameters<typeof CollectionResource>[0]) {
-    super(client, '/v1/cycle');
+    super(client, '/cycle');
   }
 
   async getRecovery(cycleId: number): Promise<Recovery> {
-    return this.client.get<Recovery>(`/v1/cycle/${cycleId}/recovery`);
+    return this.client.get<Recovery>(`/cycle/${cycleId}/recovery`);
   }
 
   async getSleep(cycleId: number): Promise<Sleep> {
-    return this.client.get<Sleep>(`/v1/cycle/${cycleId}/sleep`);
+    return this.client.get<Sleep>(`/cycle/${cycleId}/sleep`);
   }
 }

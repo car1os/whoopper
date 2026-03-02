@@ -71,8 +71,12 @@ export class OAuthProvider {
     const state = randomBytes(16).toString('hex');
     const scopes = this.config.scopes ?? DEFAULT_SCOPES;
 
-    const { port, waitForCode, close } = await startAuthServer();
-    const redirectUri = this.config.redirectUri ?? `http://localhost:${port}/callback`;
+    const configuredUri = this.config.redirectUri;
+    const requestedPort = configuredUri ? new URL(configuredUri).port : undefined;
+    const { port, waitForCode, close } = await startAuthServer(
+      requestedPort ? Number(requestedPort) : undefined,
+    );
+    const redirectUri = configuredUri ?? `http://localhost:${port}/callback`;
 
     const authUrl = new URL(AUTH_URL);
     authUrl.searchParams.set('client_id', this.config.clientId);
