@@ -30,6 +30,7 @@ export interface Workout {
   end: string;
   timezone_offset: string;
   sport_id: number;
+  sport_name: string;
   score_state: ScoreState;
   score: WorkoutScore | null;
 }
